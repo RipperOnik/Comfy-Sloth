@@ -19,11 +19,24 @@ export interface FilterState {
   allProducts: Product[];
   gridView: boolean;
   sort: string;
+  filters: Filters;
+}
+interface Filters {
+  text: string;
+  company: string;
+  category: string;
+  color: string;
+  minPrice: number;
+  maxPrice: number;
+  price: number;
+  shipping: boolean;
 }
 interface FilterContext extends FilterState {
   setGridView: () => void;
   setListView: () => void;
   updateSort: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  updateFilters: (e: any) => void;
+  clearFilters: () => void;
 }
 
 const initialState: FilterState = {
@@ -31,6 +44,16 @@ const initialState: FilterState = {
   allProducts: [],
   gridView: true,
   sort: "price-lowest",
+  filters: {
+    text: "",
+    company: "all",
+    category: "all",
+    color: "all",
+    minPrice: 0,
+    maxPrice: 0,
+    price: 0,
+    shipping: false,
+  },
 };
 
 const FilterContext = React.createContext<FilterContext>({
@@ -38,6 +61,8 @@ const FilterContext = React.createContext<FilterContext>({
   setGridView: () => {},
   setListView: () => {},
   updateSort: () => {},
+  updateFilters: (e) => {},
+  clearFilters: () => {},
 });
 
 export const FilterProvider = ({ children }: PropsWithChildren) => {
@@ -49,8 +74,9 @@ export const FilterProvider = ({ children }: PropsWithChildren) => {
   }, [products]);
 
   useEffect(() => {
+    dispatch({ type: FILTER_PRODUCTS });
     dispatch({ type: SORT_PRODUCTS });
-  }, [products, state.sort]);
+  }, [products, state.sort, state.filters]);
 
   function setGridView() {
     dispatch({ type: SET_GRIDVIEW });
@@ -63,10 +89,34 @@ export const FilterProvider = ({ children }: PropsWithChildren) => {
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
   }
+  function updateFilters(e: any) {
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === "category") {
+      value = e.target.textContent;
+    } else if (name === "color") {
+      value = e.target.dataset.color;
+    } else if (name === "price") {
+      value = Number(value);
+    } else if (name === "shipping") {
+      value = e.target.checked;
+    }
+    dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
+  }
+  function clearFilters() {
+    dispatch({ type: CLEAR_FILTERS });
+  }
 
   return (
     <FilterContext.Provider
-      value={{ ...state, setGridView, setListView, updateSort }}
+      value={{
+        ...state,
+        setGridView,
+        setListView,
+        updateSort,
+        updateFilters,
+        clearFilters,
+      }}
     >
       {children}
     </FilterContext.Provider>
