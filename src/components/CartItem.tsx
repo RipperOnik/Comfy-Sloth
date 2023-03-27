@@ -1,12 +1,53 @@
-import React from 'react'
-import styled from 'styled-components'
-import { formatPrice } from '../utils/helpers'
-import AmountButtons from './AmountButtons'
-import { FaTrash } from 'react-icons/fa'
-import { useCartContext } from '../context/cart_context'
-const CartItem = () => {
-  return <h4>cart item</h4>
+import React from "react";
+import styled from "styled-components";
+import { formatPrice } from "../utils/helpers";
+import AmountButtons from "./AmountButtons";
+import { FaTrash } from "react-icons/fa";
+import { useCartContext } from "../context/cart_context";
+
+interface CartItemProps {
+  id: string;
+  image: string;
+  name: string;
+  color: string;
+  price: number;
+  amount: number;
 }
+
+const CartItem = ({ id, image, name, color, price, amount }: CartItemProps) => {
+  const { removeItem, toggleAmount } = useCartContext();
+  function increase() {
+    toggleAmount(id, "inc");
+  }
+  function decrease() {
+    toggleAmount(id, "dec");
+  }
+
+  return (
+    <Wrapper>
+      <div className="title">
+        <img src={image} alt={name} />
+        <div>
+          <h5 className="name">{name}</h5>
+          <p className="color">
+            color : <span style={{ background: color }}></span>
+          </p>
+          <h5 className="price-small">{formatPrice(price)}</h5>
+        </div>
+      </div>
+      <h5 className="price">{formatPrice(price)}</h5>
+      <AmountButtons amount={amount} increase={increase} decrease={decrease} />
+      <h5 className="subtotal">{formatPrice(price * amount)}</h5>
+      <button
+        type="button"
+        className="remove-btn"
+        onClick={() => removeItem(id)}
+      >
+        <FaTrash />
+      </button>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.article`
   .subtotal {
@@ -57,7 +98,7 @@ const Wrapper = styled.article`
       height: 0.5rem;
       background: red;
       margin-left: 0.5rem;
-      border-radius: var(--radius);
+      border-radius: 50%;
     }
   }
   .price-small {
@@ -142,6 +183,6 @@ const Wrapper = styled.article`
       }
     }
   }
-`
+`;
 
-export default CartItem
+export default CartItem;
