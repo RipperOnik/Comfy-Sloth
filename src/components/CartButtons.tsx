@@ -1,5 +1,5 @@
 import React from "react";
-import { FaShoppingCart, FaUserMinus, FaUserPlus } from "react-icons/fa";
+import { FaShoppingCart, FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useProductsContext } from "../context/products_context";
@@ -9,6 +9,7 @@ import { useUserContext } from "../context/user_context";
 const CartButtons = () => {
   const { closeSidebar } = useProductsContext();
   const { totalItems } = useCartContext();
+  const { isAuthenticated } = useUserContext();
   return (
     <Wrapper className="cart-btn-wrapper">
       <Link to="/cart" className="cart-btn" onClick={closeSidebar}>
@@ -18,9 +19,15 @@ const CartButtons = () => {
           {totalItems > 0 && <span className="cart-value">{totalItems}</span>}
         </span>
       </Link>
-      <button type="button" className="auth-btn">
-        Login <FaUserPlus />
-      </button>
+      {isAuthenticated() ? (
+        <Link className="profile-btn" to="/user">
+          Profile
+        </Link>
+      ) : (
+        <Link className="auth-btn" to="/login">
+          Login <FaUserPlus />
+        </Link>
+      )}
     </Wrapper>
   );
 };
@@ -35,10 +42,15 @@ const Wrapper = styled.div`
     color: var(--clr-grey-1);
     font-size: 1.5rem;
     letter-spacing: var(--spacing);
-    color: var(--clr-grey-1);
     display: flex;
 
     align-items: center;
+  }
+  .profile-btn {
+    color: var(--clr-grey-1);
+    cursor: pointer;
+    font-size: 1.5rem;
+    letter-spacing: var(--spacing);
   }
   .cart-container {
     display: flex;
