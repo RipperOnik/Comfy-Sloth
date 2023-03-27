@@ -67,6 +67,7 @@ const NavContainer = styled.nav`
     }
   }
   .nav-links {
+    margin: 0 !important;
     display: none;
   }
   .cart-btn-wrapper {
