@@ -58,7 +58,9 @@ const Wrapper = styled.section`
   }
   .navigate-btn {
     color: var(--bs-link-color);
-    text-decoration: underline;
     cursor: pointer;
+  }
+  .navigate-btn:hover {
+    color: var(--bs-link-hover-color);
   }
 `;

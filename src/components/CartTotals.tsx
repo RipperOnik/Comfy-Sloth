@@ -22,7 +22,7 @@ const CartTotals = () => {
             order total : <span>{formatPrice(totalAmount + shippingFee)}</span>
           </h4>
         </article>
-        <Link to="/checkout" className="btn">
+        <Link to="/checkout" className="custom-btn">
           proceed to checkout
         </Link>
       </div>
@@ -54,7 +54,7 @@ const Wrapper = styled.section`
   @media (min-width: 776px) {
     justify-content: flex-end;
   }
-  .btn {
+  .custom-btn {
     width: 100%;
     margin-top: 1rem;
     text-align: center;
