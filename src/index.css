@@ -168,7 +168,7 @@ p {
   animation: spinner 0.6s linear infinite;
 }
 
-.btn {
+.custom-btn {
   text-transform: uppercase;
   background: var(--clr-primary-5);
   color: var(--clr-primary-10);
@@ -183,7 +183,7 @@ p {
   border-radius: var(--radius);
   border-color: transparent;
 }
-.btn:hover {
+.custom-btn:hover {
   color: var(--clr-primary-1);
   background: var(--clr-primary-7);
 }

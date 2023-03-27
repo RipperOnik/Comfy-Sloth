@@ -64,7 +64,7 @@ const AddToCart = ({ product }: AddToCartProps) => {
         />
         <Link
           to="/cart"
-          className="btn"
+          className="custom-btn"
           onClick={() => addToCart(id, mainColor, amount, product)}
         >
           add to cart
@@ -114,7 +114,7 @@ const Wrapper = styled.section`
     margin-top: 2rem;
   }
 
-  .btn {
+  .custom-btn {
     margin-top: 1rem;
     width: 140px;
   }
