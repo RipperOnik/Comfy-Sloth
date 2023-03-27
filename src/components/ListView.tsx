@@ -20,7 +20,7 @@ const ListView = ({ products }: ListViewProps) => {
               <h4>{name}</h4>
               <h5 className="price">{formatPrice(price)}</h5>
               <p>{description.substring(0, 150)}...</p>
-              <Link to={`/products/${id}`} className="btn">
+              <Link to={`/products/${id}`} className="btn-details">
                 Details
               </Link>
             </div>
@@ -54,7 +54,7 @@ const Wrapper = styled.section`
     max-width: 45em;
     margin-bottom: 1rem;
   }
-  .btn {
+  .btn-details {
     font-size: 0.5rem;
     padding: 0.25rem 0.5rem;
   }

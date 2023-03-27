@@ -14,7 +14,7 @@ interface ProductProps {
 const Product = ({ image, name, price, id }: ProductProps) => {
   return (
     <Wrapper>
-      <div className="container">
+      <div className="img-container">
         <img src={image} alt={name} />
         <Link to={`/products/${id}`} className="link">
           <FaSearch />
@@ -29,7 +29,7 @@ const Product = ({ image, name, price, id }: ProductProps) => {
 };
 
 const Wrapper = styled.article`
-  .container {
+  .img-container {
     position: relative;
     background: var(--clr-black);
     border-radius: var(--radius);
@@ -64,10 +64,10 @@ const Wrapper = styled.article`
       color: var(--clr-white);
     }
   }
-  .container:hover img {
+  .img-container:hover img {
     opacity: 0.5;
   }
-  .container:hover .link {
+  .img-container:hover .link {
     opacity: 1;
   }
   footer {

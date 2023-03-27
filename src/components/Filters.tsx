@@ -30,7 +30,7 @@ const Filters = () => {
       <div className="content">
         <form onSubmit={(e) => e.preventDefault()}>
           {/* search input */}
-          <div className="form-control">
+          <div className="filter-form-control">
             <input
               type="text"
               name="text"
@@ -42,7 +42,7 @@ const Filters = () => {
           </div>
           {/* search input ends */}
           {/* categories */}
-          <div className="form-control">
+          <div className="filter-form-control">
             <h5>category</h5>
             <div>
               {categories.map((c, index) => {
@@ -64,7 +64,7 @@ const Filters = () => {
           </div>
           {/* categories ends */}
           {/* companies */}
-          <div className="form-control">
+          <div className="filter-form-control">
             <h5>company</h5>
             <select
               name="company"
@@ -83,7 +83,7 @@ const Filters = () => {
           </div>
           {/* companies ends */}
           {/* colors */}
-          <div className="form-control">
+          <div className="filter-form-control">
             <h5>colors</h5>
             <div className="colors">
               {colors.map((c, index) => {
@@ -121,7 +121,7 @@ const Filters = () => {
           </div>
           {/* colors ends */}
           {/* price */}
-          <div className="form-control">
+          <div className="filter-form-control">
             <h5>price</h5>
             <p className="price">{formatPrice(price)}</p>
             <input
@@ -135,7 +135,7 @@ const Filters = () => {
           </div>
           {/* price ends */}
           {/* shipping */}
-          <div className="form-control shipping">
+          <div className="filter-form-control shipping">
             <label htmlFor="shipping">free shipping</label>
             <input
               type="checkbox"
@@ -156,7 +156,7 @@ const Filters = () => {
 };
 
 const Wrapper = styled.section`
-  .form-control {
+  .filter-form-control {
     margin-bottom: 1.25rem;
     h5 {
       margin-bottom: 0.5rem;
