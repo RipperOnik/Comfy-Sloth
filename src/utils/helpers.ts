@@ -1,4 +1,3 @@
-import { Product } from "./../context/products_context";
 export const formatPrice = (number: number) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",

@@ -1,5 +1,5 @@
 import React from "react";
-import { FaShoppingCart, FaUserPlus } from "react-icons/fa";
+import { FaShoppingCart, FaUserPlus, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useProductsContext } from "../context/products_context";
@@ -21,7 +21,7 @@ const CartButtons = () => {
       </Link>
       {isAuthenticated() ? (
         <Link className="profile-btn" to="/user">
-          Profile
+          Profile <FaUser />
         </Link>
       ) : (
         <Link className="auth-btn" to="/login">
@@ -45,12 +45,6 @@ const Wrapper = styled.div`
     display: flex;
 
     align-items: center;
-  }
-  .profile-btn {
-    color: var(--clr-grey-1);
-    cursor: pointer;
-    font-size: 1.5rem;
-    letter-spacing: var(--spacing);
   }
   .cart-container {
     display: flex;
@@ -76,7 +70,8 @@ const Wrapper = styled.div`
     color: var(--clr-white);
     padding: 12px;
   }
-  .auth-btn {
+  .auth-btn,
+  .profile-btn {
     display: flex;
     align-items: center;
     background: transparent;

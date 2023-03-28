@@ -29,6 +29,9 @@ const FeaturedProducts = () => {
           return <Product key={product.id} {...product} />;
         })}
       </div>
+      <Link to="/products" className="custom-btn">
+        all products
+      </Link>
     </Wrapper>
   );
 };
@@ -43,7 +46,7 @@ const Wrapper = styled.section`
       height: 225px;
     }
   }
-  .btn {
+  .custom-btn {
     display: block;
     width: 148px;
     margin: 0 auto;

@@ -3,12 +3,15 @@ import { Card, Alert, Stack } from "react-bootstrap";
 import { useUserContext } from "../../context/user_context";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useCartContext } from "../../context/cart_context";
 
 export default function Profile() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useUserContext();
+  const { clearCart } = useCartContext();
   const navigate = useNavigate();
   async function handleLogout() {
+    clearCart();
     setError("");
     try {
       await logout();

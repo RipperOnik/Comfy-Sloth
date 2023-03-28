@@ -4,9 +4,11 @@ import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { formatPrice } from "../utils/helpers";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const CartTotals = () => {
   const { totalAmount, shippingFee } = useCartContext();
+  const { isAuthenticated } = useUserContext();
   return (
     <Wrapper>
       <div>
@@ -23,7 +25,7 @@ const CartTotals = () => {
           </h4>
         </article>
         <Link to="/checkout" className="custom-btn">
-          proceed to checkout
+          {isAuthenticated() ? "proceed to checkout" : "login"}
         </Link>
       </div>
     </Wrapper>

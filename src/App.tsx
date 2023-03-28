@@ -20,6 +20,13 @@ import { useUserContext } from "./context/user_context";
 
 function App() {
   const { isAuthenticated } = useUserContext();
+  function privateRoute(element: JSX.Element) {
+    if (isAuthenticated()) {
+      return element;
+    } else {
+      return <Navigate to="/login" />;
+    }
+  }
   return (
     <BrowserRouter>
       <Routes>
@@ -65,11 +72,11 @@ function App() {
         />
         <Route
           path="/checkout"
-          element={
+          element={privateRoute(
             <HomeRoute>
               <Checkout />
             </HomeRoute>
-          }
+          )}
         />
         <Route
           path="*"
@@ -80,15 +87,10 @@ function App() {
           }
         />
         {/* Profile */}
-        <Route
-          path="/user"
-          element={isAuthenticated() ? <Profile /> : <Navigate to="/login" />}
-        />
+        <Route path="/user" element={privateRoute(<Profile />)} />
         <Route
           path="/update-profile"
-          element={
-            isAuthenticated() ? <UpdateProfile /> : <Navigate to="/login" />
-          }
+          element={privateRoute(<UpdateProfile />)}
         />
         {/* Auth */}
         <Route path="/signup" element={<Signup />} />
@@ -109,9 +111,5 @@ function HomeRoute({ children }: PropsWithChildren) {
     </>
   );
 }
-// function PrivateRoute({ children }: PropsWithChildren) {
-//   const { isAuthenticated } = useUserContext();
-//   return isAuthenticated() ? children : <Navigate to="/login" />;
-// }
 
 export default App;
