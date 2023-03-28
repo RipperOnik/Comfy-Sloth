@@ -146,7 +146,7 @@ function StripeCheckout() {
 
 const Wrapper = styled.section`
   form {
-    width: 30vw;
+    width: 40vw;
     align-self: center;
     box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
       0px 2px 5px 0px rgba(50, 50, 93, 0.1),
@@ -277,9 +277,19 @@ const Wrapper = styled.section`
       transform: rotate(360deg);
     }
   }
+  @media only screen and (max-width: 1150px) {
+    form {
+      width: 50vw;
+    }
+  }
+  @media only screen and (max-width: 992px) {
+    form {
+      width: 70vw;
+    }
+  }
   @media only screen and (max-width: 600px) {
     form {
-      width: 80vw;
+      width: 95vw;
     }
   }
 `;
