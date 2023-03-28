@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -11,7 +11,6 @@ import axios from "axios";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { formatPrice } from "../utils/helpers";
-import { useLocation, useNavigate } from "react-router-dom";
 import { StripeCardElementChangeEvent } from "@stripe/stripe-js";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!);
@@ -19,7 +18,6 @@ const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!);
 function CheckoutForm() {
   const { cart, totalAmount, shippingFee, clearCart } = useCartContext();
   const { currentUser } = useUserContext();
-  const navigate = useNavigate();
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
@@ -27,7 +25,6 @@ function CheckoutForm() {
   const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-  const [timer, setTimer] = useState(0);
 
   async function createPaymentIntent() {
     try {
