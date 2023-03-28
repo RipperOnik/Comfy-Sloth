@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -11,7 +11,7 @@ import axios from "axios";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { formatPrice } from "../utils/helpers";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { StripeCardElementChangeEvent } from "@stripe/stripe-js";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!);
@@ -28,7 +28,6 @@ function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const [timer, setTimer] = useState(0);
-  const timerTime = 10000;
 
   async function createPaymentIntent() {
     try {
@@ -88,15 +87,9 @@ function CheckoutForm() {
         setProcessing(false);
         setSucceeded(true);
 
-        setTimer(timerTime);
-        const interval = setInterval(() => {
-          setTimer((prev) => prev - 1000);
-        }, 1000);
         setTimeout(() => {
           clearCart();
-          navigate("/");
-          clearInterval(interval);
-        }, timerTime);
+        }, 5000);
       }
     }
   }
@@ -106,10 +99,6 @@ function CheckoutForm() {
         <article>
           <h4>Thank you</h4>
           <h4>Your payment was successful!</h4>
-          <h4>
-            Redirecting to home page shortly in{" "}
-            <span>{timer / 1000} seconds</span>
-          </h4>
         </article>
       ) : (
         <article>
