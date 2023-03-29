@@ -2,18 +2,36 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Image } from "../context/products_context";
 import Loading from "./Loading";
+import ZoomedImagesPopup from "./ZoomedImagesPopup";
 
 interface ProductImagesProps {
   images: Image[];
+  productName: string;
 }
 
-const ProductImages = ({ images }: ProductImagesProps) => {
-  const defaultImage = !images || images.length === 0 ? { url: "" } : images[0];
-  const [main, setMain] = useState(defaultImage);
+const ProductImages = ({ images, productName }: ProductImagesProps) => {
+  const [mainIndex, setMainIndex] = useState(0);
+  const [showZoomedImages, setShowZoomedImages] = useState(false);
   if (images && images.length > 0) {
+    if (showZoomedImages) {
+      return (
+        <ZoomedImagesPopup
+          images={images}
+          hide={() => setShowZoomedImages(false)}
+          title={productName}
+          mainImageIndex={mainIndex}
+        />
+      );
+    }
+
     return (
       <Wrapper>
-        <img src={main.url} alt="main" className="main" />
+        <img
+          src={images[mainIndex].url}
+          alt="main"
+          className="main"
+          onClick={() => setShowZoomedImages(true)}
+        />
         <div className="gallery">
           {images.map((image, index) => {
             return (
@@ -21,8 +39,10 @@ const ProductImages = ({ images }: ProductImagesProps) => {
                 src={image.url}
                 alt={image.filename}
                 key={index}
-                onClick={() => setMain(images[index])}
-                className={`${image.url === main.url ? "active" : null}`}
+                onClick={() => setMainIndex(index)}
+                className={`${
+                  image.url === images[mainIndex].url ? "active" : null
+                }`}
               />
             );
           })}
@@ -37,6 +57,7 @@ const ProductImages = ({ images }: ProductImagesProps) => {
 const Wrapper = styled.section`
   .main {
     height: 600px;
+    cursor: zoom-in;
   }
   img {
     width: 100%;
