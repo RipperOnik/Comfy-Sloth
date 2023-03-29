@@ -43,10 +43,16 @@ export default function ZoomedImagesPopup({
   useEffect(() => {
     function keypressListener(event: KeyboardEvent) {
       const { key } = event;
-      if (key === "ArrowLeft") {
-        scrollLeft();
-      } else if (key === "ArrowRight") {
-        scrollRight();
+      switch (key) {
+        case "ArrowLeft":
+          scrollLeft();
+          break;
+        case "ArrowRight":
+          scrollRight();
+          break;
+        case "Escape":
+          hide();
+          break;
       }
     }
     document.body.addEventListener("keydown", keypressListener);
