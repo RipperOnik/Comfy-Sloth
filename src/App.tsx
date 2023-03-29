@@ -65,9 +65,9 @@ function App() {
         <Route
           path="/products/:id"
           element={
-            <HomeRoute>
-              <SingleProduct />
-            </HomeRoute>
+            // <HomeRoute>
+            <SingleProduct />
+            // </HomeRoute>
           }
         />
         <Route
@@ -101,7 +101,7 @@ function App() {
   );
 }
 
-function HomeRoute({ children }: PropsWithChildren) {
+export function HomeRoute({ children }: PropsWithChildren) {
   return (
     <>
       <Navbar />

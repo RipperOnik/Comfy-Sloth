@@ -1,18 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProductsContext } from "../context/products_context";
 import { single_product_url as url } from "../utils/constants";
 import { formatPrice } from "../utils/helpers";
-import {
-  Loading,
-  Error,
-  ProductImages,
-  AddToCart,
-  Stars,
-  PageHero,
-} from "../components";
+import { Loading, Error, AddToCart, Stars, PageHero } from "../components";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { HomeRoute } from "../App";
+import ZoomedImagesPopup from "../components/ZoomedImagesPopup";
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -33,6 +28,8 @@ const SingleProductPage = () => {
       }, 3000);
     }
   }, [error]);
+  const [mainIndex, setMainIndex] = useState(0);
+  const [showZoomedImages, setShowZoomedImages] = useState(false);
 
   if (loading) {
     return <Loading />;
@@ -41,7 +38,7 @@ const SingleProductPage = () => {
     return <Error />;
   }
 
-  if (product) {
+  if (product && product.images && product.images.length > 0) {
     const {
       name,
       price,
@@ -53,38 +50,75 @@ const SingleProductPage = () => {
       company,
       images,
     } = product;
+
+    if (showZoomedImages) {
+      return (
+        <ZoomedImagesPopup
+          images={images}
+          hide={() => setShowZoomedImages(false)}
+          title={name}
+          mainImageIndex={mainIndex}
+        />
+      );
+    }
+
     return (
-      <Wrapper>
-        <PageHero title={name} product />
-        <div className="section section-center page">
-          <Link to="/products" className="custom-btn">
-            back to products
-          </Link>
-          <div className="product-center">
-            <ProductImages images={images} productName={name} />
-            <section className="content">
-              <h2>{name}</h2>
-              <Stars stars={stars} reviews={reviews} />
-              <h5 className="price">{formatPrice(price)}</h5>
-              <p className="desc">{description}</p>
-              <p className="info">
-                <span>Available : </span>
-                {stock > 0 ? "In stock" : "Out of stock"}
-              </p>
-              <p className="info">
-                <span>SKU : </span>
-                {sku}
-              </p>
-              <p className="info">
-                <span>Brand : </span>
-                {company}
-              </p>
-              <hr />
-              {stock > 0 && <AddToCart product={product} />}
-            </section>
+      <HomeRoute>
+        <Wrapper>
+          <PageHero title={name} product />
+          <div className="section section-center page">
+            <Link to="/products" className="custom-btn">
+              back to products
+            </Link>
+            <div className="product-center">
+              <ProductImages>
+                <img
+                  src={images[mainIndex].url}
+                  alt="main"
+                  className="main"
+                  onClick={() => setShowZoomedImages(true)}
+                />
+                <div className="gallery">
+                  {images.map((image, index) => {
+                    return (
+                      <img
+                        src={image.url}
+                        alt={image.filename}
+                        key={index}
+                        onClick={() => setMainIndex(index)}
+                        className={`${
+                          image.url === images[mainIndex].url ? "active" : null
+                        }`}
+                      />
+                    );
+                  })}
+                </div>
+              </ProductImages>
+
+              <section className="content">
+                <h2>{name}</h2>
+                <Stars stars={stars} reviews={reviews} />
+                <h5 className="price">{formatPrice(price)}</h5>
+                <p className="desc">{description}</p>
+                <p className="info">
+                  <span>Available : </span>
+                  {stock > 0 ? "In stock" : "Out of stock"}
+                </p>
+                <p className="info">
+                  <span>SKU : </span>
+                  {sku}
+                </p>
+                <p className="info">
+                  <span>Brand : </span>
+                  {company}
+                </p>
+                <hr />
+                {stock > 0 && <AddToCart product={product} />}
+              </section>
+            </div>
           </div>
-        </div>
-      </Wrapper>
+        </Wrapper>
+      </HomeRoute>
     );
   }
   return <div className="section-centered">Product not found</div>;
@@ -120,6 +154,52 @@ const Wrapper = styled.main`
     }
     .price {
       font-size: 1.25rem;
+    }
+  }
+`;
+
+const ProductImages = styled.section`
+  .main {
+    height: 600px;
+    cursor: zoom-in;
+  }
+  img {
+    width: 100%;
+    display: block;
+    border-radius: var(--radius);
+    object-fit: cover;
+  }
+  .gallery {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 1rem;
+    img {
+      height: 100px;
+      cursor: pointer;
+    }
+  }
+  .active {
+    box-shadow: 0px 0px 0px 2px var(--clr-primary-5);
+  }
+  @media (max-width: 576px) {
+    .main {
+      height: 300px;
+    }
+    .gallery {
+      img {
+        height: 50px;
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    .main {
+      height: 500px;
+    }
+    .gallery {
+      img {
+        height: 75px;
+      }
     }
   }
 `;
