@@ -100,7 +100,7 @@ export default function ZoomedImagesPopup({
 }
 
 const Wrapper = styled.section`
-  height: 100%;
+  height: 100svh;
   width: 100%;
   background-color: white;
   h4 {
@@ -128,7 +128,7 @@ const Wrapper = styled.section`
   .content {
     display: flex;
     flex-grow: 1;
-    height: calc(100vh - 200px);
+    height: calc(100svh - 200px);
     .swipe-btn {
       display: flex;
       border-color: transparent;
@@ -176,12 +176,12 @@ const Wrapper = styled.section`
   }
   @media (max-width: 992px) {
     .content {
-      height: calc(100vh - 150px);
+      height: calc(100svh - 150px);
       .swipe-btn {
         display: none;
       }
       .main-image {
-        height: calc(100vh - 150px);
+        height: calc(100svh - 150px);
         width: 90%;
       }
     }
