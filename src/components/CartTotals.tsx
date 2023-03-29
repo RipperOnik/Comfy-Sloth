@@ -10,7 +10,7 @@ const CartTotals = () => {
   const { isAuthenticated } = useUserContext();
   return (
     <Wrapper>
-      <div>
+      <div className="content">
         <article>
           <h5>
             subtotal : <span>{formatPrice(totalAmount)}</span>
@@ -35,6 +35,12 @@ const Wrapper = styled.section`
   margin-top: 3rem;
   display: flex;
   justify-content: center;
+
+  .content {
+    min-width: 0;
+    width: 100%;
+  }
+
   article {
     border: 1px solid var(--clr-grey-8);
     border-radius: var(--radius);
@@ -54,6 +60,11 @@ const Wrapper = styled.section`
   }
   @media (min-width: 776px) {
     justify-content: flex-end;
+    flex-shrink: 1;
+    .content {
+      min-width: 500px;
+      width: auto;
+    }
   }
   .custom-btn {
     width: 100%;

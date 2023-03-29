@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { useProductsContext } from "../context/products_context";
 import { FaTimes } from "react-icons/fa";
@@ -18,7 +17,10 @@ const Sidebar = () => {
         className={`${isSidebarOpen ? "sidebar show-sidebar" : "sidebar"}`}
       >
         <div className="sidebar-header">
-          <img src={logo} className="logo" alt="comfy sloth" />
+          <Link to="/" className="logo-container">
+            <div className="logo">F</div>
+            FurniStore
+          </Link>
           <button className="close-btn" type="button" onClick={closeSidebar}>
             <FaTimes />
           </button>
@@ -51,6 +53,27 @@ const Sidebar = () => {
 
 const SidebarContainer = styled.div`
   text-align: center;
+  .logo-container {
+    display: flex;
+    color: black;
+    font-size: 25px;
+    gap: 10px;
+    font-family: var(--logo-font);
+    align-items: center;
+    justify-self: center;
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      background-color: var(--clr-primary-6);
+      font-size: 30px;
+    }
+  }
+
   .sidebar-header {
     display: flex;
     justify-content: space-between;
@@ -58,6 +81,8 @@ const SidebarContainer = styled.div`
     padding: 1rem 1.5rem;
   }
   .close-btn {
+    display: flex;
+    align-items: center;
     font-size: 2rem;
     background: transparent;
     border-color: transparent;
@@ -69,10 +94,6 @@ const SidebarContainer = styled.div`
   }
   .close-btn:hover {
     color: var(--clr-red-light);
-  }
-  .logo {
-    justify-self: center;
-    height: 45px;
   }
   .links {
     margin-bottom: 2rem;

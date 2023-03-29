@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../assets/logo.svg";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { links } from "../utils/constants";
@@ -15,8 +14,9 @@ const Nav = () => {
     <NavContainer>
       <div className="nav-center">
         <div className="nav-header">
-          <Link to="/">
-            <img src={logo} alt="comfy sloth" />
+          <Link to="/" className="logo-container">
+            <div className="logo">F</div>
+            FurniStore
           </Link>
           <button type="button" className="nav-toggle" onClick={openSidebar}>
             <FaBars />
@@ -50,6 +50,26 @@ const NavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .logo-container {
+    display: flex;
+    color: black;
+    font-family: var(--logo-font);
+    font-size: 25px;
+    align-items: center;
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      background-color: var(--clr-primary-6);
+      font-size: 30px;
+      margin-right: 10px;
+    }
+  }
 
   .nav-center {
     width: 90vw;
