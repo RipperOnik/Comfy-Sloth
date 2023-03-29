@@ -100,12 +100,8 @@ export default function ZoomedImagesPopup({
 }
 
 const Wrapper = styled.section`
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 5;
   background-color: white;
   h4 {
     margin: 0;
