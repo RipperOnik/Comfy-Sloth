@@ -69,11 +69,13 @@ export default function ZoomedImagesPopup({
           <FaTimes />
         </button>
       </section>
-      <section className="main-image-container">
+      <section className="content">
         <button type="button" className="swipe-btn" onClick={scrollLeft}>
           <FaArrowLeft />
         </button>
-        <img src={images[mainIndex].url} alt="main" className="main-image" />
+        <div className="main-image-container">
+          <img src={images[mainIndex].url} alt="main" className="main-image" />
+        </div>
         <button type="button" className="swipe-btn" onClick={scrollRight}>
           <FaArrowRight />
         </button>
@@ -124,11 +126,10 @@ const Wrapper = styled.section`
     cursor: pointer;
     color: var(--clr-grey-3);
   }
-  .main-image-container {
+  .content {
+    display: flex;
     flex-grow: 1;
-    display: grid;
     height: calc(100vh - 250px);
-    grid-template-columns: 100px 1fr 100px;
     .swipe-btn {
       display: flex;
       border-color: transparent;
@@ -136,14 +137,20 @@ const Wrapper = styled.section`
       align-items: center;
       justify-content: center;
       transition: var(--transition);
+      width: 100px;
     }
     .swipe-btn:hover {
       background-color: var(--clr-grey-10);
     }
-    .main-image {
-      height: calc(100vh - 250px);
-      width: 100%;
-      object-fit: fill;
+    .main-image-container {
+      flex-shrink: 1;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .main-image {
+        flex-shrink: 1;
+      }
     }
   }
   .gallery {
@@ -169,11 +176,14 @@ const Wrapper = styled.section`
     box-shadow: 0px 0px 0px 2px var(--clr-primary-5);
   }
   @media (max-width: 992px) {
-    .main-image-container {
+    .content {
       height: calc(100vh - 150px);
-      grid-template-columns: 50px 1fr 50px;
+      .swipe-btn {
+        display: none;
+      }
       .main-image {
         height: calc(100vh - 150px);
+        width: 90%;
       }
     }
     .header {
