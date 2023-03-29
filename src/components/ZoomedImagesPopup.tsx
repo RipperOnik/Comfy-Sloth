@@ -107,6 +107,9 @@ const Wrapper = styled.section`
   top: 0;
   z-index: 5;
   background-color: white;
+  h4 {
+    margin: 0;
+  }
   .header {
     display: flex;
     background-color: #f9f9f9;
@@ -114,7 +117,7 @@ const Wrapper = styled.section`
     align-items: center;
     border-bottom: 1px solid var(--clr-grey-10);
     padding: 1rem;
-    height: 100px;
+    height: 50px;
   }
   .close-btn {
     display: flex;
@@ -129,7 +132,7 @@ const Wrapper = styled.section`
   .content {
     display: flex;
     flex-grow: 1;
-    height: calc(100vh - 250px);
+    height: calc(100vh - 200px);
     .swipe-btn {
       display: flex;
       border-color: transparent;
