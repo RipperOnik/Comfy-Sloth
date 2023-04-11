@@ -1,6 +1,6 @@
 Furni Store - is an application for buying furniture. [View deployed application](https://furni-store2023.netlify.app/)
 
-##Project frameworks and libraries
+## Project frameworks and libraries
 - React
 - Typescript
 - Styled components
