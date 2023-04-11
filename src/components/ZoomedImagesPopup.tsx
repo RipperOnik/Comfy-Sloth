@@ -149,6 +149,8 @@ const Wrapper = styled.section`
       align-items: center;
       .main-image {
         flex-shrink: 1;
+        height: 100%;
+        max-width: 90%;
       }
     }
   }
@@ -179,10 +181,6 @@ const Wrapper = styled.section`
       height: calc(100svh - 150px);
       .swipe-btn {
         display: none;
-      }
-      .main-image {
-        height: calc(100svh - 150px);
-        width: 90%;
       }
     }
     .header {
