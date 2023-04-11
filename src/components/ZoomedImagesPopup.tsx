@@ -149,7 +149,7 @@ const Wrapper = styled.section`
       align-items: center;
       .main-image {
         flex-shrink: 1;
-        height: 100%;
+        max-height: 100%;
         max-width: 90%;
       }
     }
