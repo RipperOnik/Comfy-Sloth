@@ -19,3 +19,9 @@ Furni Store - is an application for buying furniture. [View deployed application
 ![cart](https://user-images.githubusercontent.com/55228345/231178260-dc0c80f8-dd1e-4aa9-8bfb-6ca788d935e1.png)
 - proceed to checkout to enter bank card details and pay
 ![checkout](https://user-images.githubusercontent.com/55228345/231178833-82c63dab-1852-4812-ac53-0df02c55670c.png)
+- register, login, or update profile 
+
+![login](https://user-images.githubusercontent.com/55228345/231180041-254bc4f2-fe67-483e-a98d-865d1960ff7c.png)
+![profile](https://user-images.githubusercontent.com/55228345/231180149-5122b362-9b4c-4fef-9f41-880934a28822.png)
+
+
